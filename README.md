@@ -9,10 +9,8 @@ Subsecciones del proyecto:
 
 Fundamentos/Fundamentos-master.zip : Proyecto con chat integrado para modificar.
 
-Fundamentos/DIA-Actividades : Modelo Actividades a y b.
-
 Fundamentos/DIA-MER : Modelo MER.
 
-Fundamentos/EA-MODELS : Modelo Relacional en Enterprise Architecht.
+Fundamentos/EA-MODELS : Modelo Relacional y de atividades en Enterprise Architecht.
 
 Fundamentos/DB : Script BD - oracle.
