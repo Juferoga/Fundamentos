@@ -1,0 +1,17 @@
+Entidades y Atributos:
+
+  1)Estudiante : Esta Entidad es la que representa a un estudiante dentro del aplicativo
+    
+    a)codigo estudiante : Codigo institucional de un estudiante en un sistema.
+    b)
+    c)
+  
+  2)Monitoria : Esta Entidad es la que representa a un La Monitoria dentro del aplicativo
+  
+  3)Recompensa : Esta Entidad es la que representa a las Recompensas dentro del aplicativo
+  
+  4)Postulado : Esta Entidad representa los monitores postulados pero no activados
+  dentro del aplicativo
+  
+  5)Monitor : Esta Entidad es la que representa a un Monitor dentro del aplicativo
+  
