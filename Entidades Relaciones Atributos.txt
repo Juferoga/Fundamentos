@@ -1,17 +1,47 @@
-Entidades y Atributos:
+#Entidades y Atributos:
 
-  1)Estudiante : Esta Entidad es la que representa a un estudiante dentro del aplicativo
+  #1)Estudiante : Esta Entidad es la que representa a un estudiante dentro del aplicativo
     
-    a)codigo estudiante : Codigo institucional de un estudiante en un sistema.
-    b)
-    c)
+    a)Código estudiante : Codigo institucional de un estudiante en un sistema.
+    b)Nombre estudiante : Nombre del estudiante.
+    c)Programa academico : Programa al cual pertenece dentro de la universidad.
+    d)Email : Correo del estudiante.
+    e)Estado : Estado de suspension de la cuenta del estudiante.
   
-  2)Monitoria : Esta Entidad es la que representa a un La Monitoria dentro del aplicativo
+      #1.1) Relacion Califica:
+
+        a)Calificación: La calificación ya sea del estudiante o del monitor.
+        b)id del calificante: identificacion del que realizo la calificación.
+        b)id del calificado: identificacion del que se le realizo la calificación.
+
+     #1.2) Relacion Puede ser // NO SE SI IMPLEMENTARLA
+
+        a)ROL: Se da el rol del estudiante (si es estudiante o monitor).
   
-  3)Recompensa : Esta Entidad es la que representa a las Recompensas dentro del aplicativo
+  #2)Monitoria : Esta Entidad es la que representa a un La Monitoria dentro del aplicativo
   
-  4)Postulado : Esta Entidad representa los monitores postulados pero no activados
+    a)Materia: Materia de la que se va dar la monitoria.
+    b)Tema: Tema de la materia a abordar.
+    c)Estado: Estado de la monitoria.
+    d)Recompensa: Recompensa que se va a dar por la monitoria.
+    
+  
+  #3)Recompensa : Esta Entidad es la que representa a las Recompensas dentro del aplicativo
+  
+    a)Identificador: Identificador de la recompensa dad por el estudiante al monitor.
+    b)Nombre: Nombre atribuido a la recompensa.
+    c)Descripcion: Descripción de la recompensa.
+    d)Imagen:Imagen asociada a la recompensa.
+  
+  #4)Postulado : Esta Entidad representa los monitores postulados pero no activados
   dentro del aplicativo
   
-  5)Monitor : Esta Entidad es la que representa a un Monitor dentro del aplicativo
+    a) Estado: Se ve si esta postulado para una Monitoria.
   
+  #5)Monitor : Esta Entidad es la que representa a un Monitor dentro del aplicativo
+  
+     a)Código Monitor : Codigo institucional de un Monitor en un sistema.
+    b)Nombre Monitor : Nombre del Monitor.
+    c)Programa academico : Programa al cual pertenece dentro de la universidad.
+    d)Email : Correo del Monitor.
+    e)Estado : Estado de suspension de la cuenta del Monitor.
