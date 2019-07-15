@@ -8,4 +8,5 @@ dentro de la Univers*dad Distri*al.
 ## Integrantes por si algo:
 
 Juan Felipe Rodriguez 20181020158
+Brayan Nicolás Mendigaño Madero 20162021292
 # sigan prros
