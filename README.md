@@ -7,8 +7,9 @@ dentro de la Univers*dad Distri*al.
 
 ## Integrantes por si algo:
 
-Juan Felipe Rodriguez 20181020158
-Brayan Nicolás Mendigaño Madero 20162021292
+1) Juan Felipe Rodriguez 20181020158
+2) Brayan Nicolás Mendigaño Madero 20162021292
+
 # Proyecto Final Final Escritorio
 
 Es en el que se Desarrolla. :D  
