@@ -6,6 +6,9 @@
 package Logica.L1_GestionEstudiante;
 
 import Datos.D1_GestionEstudiante;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import util.CaException;
 
 
 /**
@@ -21,9 +24,14 @@ private String apellido;
 private String email;
 private int telefono;
 private String programaAcademico;
+private String contrasena;
 private double promedio_m;
 private double promedio_e;
 private boolean Estado;
+
+public Estudiante (){
+
+}
 
 public Estudiante (int codigo, String nombre,String apellido, String email, 
         int telefono, String programaAcademico,double promedio_e, double promedio_m,boolean Estado){
@@ -39,6 +47,86 @@ public Estudiante (int codigo, String nombre,String apellido, String email,
     this.Estado = Estado;
     
 }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getProgramaAcademico() {
+        return programaAcademico;
+    }
+
+    public void setProgramaAcademico(String programaAcademico) {
+        this.programaAcademico = programaAcademico;
+    }
+
+    public double getPromedio_m() {
+        return promedio_m;
+    }
+
+    public void setPromedio_m(double promedio_m) {
+        this.promedio_m = promedio_m;
+    }
+
+    public double getPromedio_e() {
+        return promedio_e;
+    }
+
+    public void setPromedio_e(double promedio_e) {
+        this.promedio_e = promedio_e;
+    }
+
+    public boolean isEstado() {
+        return Estado;
+    }
+
+    public void setEstado(boolean Estado) {
+        this.Estado = Estado;
+    }
     
 public int CrearUsuario(int codigo, String nombre,String apellido, String email, 
         int telefono, String programaAcademico,double promedio_e, double promedio_m
@@ -46,8 +134,9 @@ public int CrearUsuario(int codigo, String nombre,String apellido, String email,
     
     D1_GestionEstudiante d= new D1_GestionEstudiante();
     
-    return d.CreacionEstudiante(codigo, nombre, apellido, email, telefono, 
-            programaAcademico, promedio_e, promedio_m, Estado);
+    return 1;
+//    return d.CreacionEstudiante(codigo, nombre, apellido, email, telefono, 
+  //          programaAcademico, promedio_e, promedio_m, Estado);
 }
 
 public int ModificarUsuario(int codigo,String email,int telefono, String programaAcademico,
@@ -55,53 +144,99 @@ public int ModificarUsuario(int codigo,String email,int telefono, String program
     
     D1_GestionEstudiante d= new D1_GestionEstudiante();
     
-
-    return d.ActualizacionEstudiante(codigo,email, telefono, programaAcademico,
-            promedio_e, promedio_m, Estado);
+    try {
+        d.ActualizacionEstudiante(codigo,email, telefono, programaAcademico,
+                promedio_e, promedio_m, Estado);
+    } catch (CaException ex) {
+        Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return 1;
 }
 
 
 public int EliminarUsuario(int codigo){
     
     D1_GestionEstudiante d= new D1_GestionEstudiante();
+    try {
+        d.EliminacionEstudiante(codigo);
+    } catch (CaException ex) {
+        Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+    }
     
-    return d.EliminacionEstudiante(codigo);
+    return 1;
 }
 
 public int ConsultaIngreso(int codigo,String contrasena){
     
     D1_GestionEstudiante d= new D1_GestionEstudiante();
     
-    return d.ConsultaLogin(codigo,contrasena);
+    try {
+        d.ConsultaLogin(codigo,contrasena);
+        
+    } catch (CaException ex) {
+        Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return 1;
 }
 
 public int ConsultarGeneralUsuario(){
     
     D1_GestionEstudiante d= new D1_GestionEstudiante();
-    return d.ConsultaEstudiante();
+    try {
+        d.ConsultaEstudiante();
+    } catch (CaException ex) {
+        Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return 1;
 }
 
 public int ConsultarEspecificaNombre(String nombre){
     
     D1_GestionEstudiante d= new D1_GestionEstudiante();
+    try {
+        d.ConsultaEspecificaNom(nombre);
+    } catch (CaException ex) {
+        Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+    }
     
-    return d.ConsultaEspecificaNom(nombre);
+    return 1;
 }
 
 public int ConsultarEspecificaIdentificacion(int codigo){
     
     D1_GestionEstudiante d= new D1_GestionEstudiante();
-    return d.ConsultaEspecificaID(codigo);
+    try {
+        d.ConsultaEspecificaID(codigo);
+    } catch (CaException ex) {
+        Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return 1;
 }
 
 public int ConsultarEspecificaProgramaAca(String programaAcademico){
     D1_GestionEstudiante d= new D1_GestionEstudiante();
-    return d.ConsultaEspecificaPA(programaAcademico);
+    try {
+        d.ConsultaEspecificaPA(programaAcademico);
+    } catch (CaException ex) {
+        Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return 1;
 }
 
 public int ConsultarEspecificaEstado(boolean estado){
     D1_GestionEstudiante d= new D1_GestionEstudiante();
-    return d.ConsultaEspecificaEstado(estado);
+    try {
+        d.ConsultaEspecificaEstado(estado);
+    } catch (CaException ex) {
+        Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return 1;
 }
 
 }
