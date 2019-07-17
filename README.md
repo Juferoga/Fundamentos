@@ -9,8 +9,8 @@ dentro de la Univers?dad Distri?al.
 
 1) Juan Felipe Rodriguez 20181020158
 2) Brayan Nicolás Mendigaño Madero 20162021292
-3) Juan Perea
-4) Nicolas Ramirez
+3) Juan Perea 20162020074
+4) Nicolas Ramirez 20162020033
 
 # Proyecto Final Final Escritorio
 
