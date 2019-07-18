@@ -29,15 +29,14 @@ class Controlador implements ActionListener{
         boton = (JButton)e.getSource();
         
         String PuertoE=ventana.getTxtPuerto().getText();
-        String HostE=ventana.getTxtHost().getText();
         String AliasE=ventana.getTxtAlias().getText();
-        if(PuertoE.isEmpty() || HostE.isEmpty() || AliasE.isEmpty()){
+        if(PuertoE.isEmpty() || AliasE.isEmpty()){
             mostrarError("Hay algun requisito vacio");
             return;
         }else
             if(ventana.getEleccion()== 0 )
-                ventana.getModelo().iniciarServidor(Integer.parseInt(PuertoE),HostE);
+                ventana.getModelo().iniciarServidor(Integer.parseInt(PuertoE));
             else
-                ventana.getModelo().iniciarCliente(Integer.parseInt(PuertoE),HostE,AliasE);
+                ventana.getModelo().iniciarCliente(Integer.parseInt(PuertoE),AliasE);
     }    
 }

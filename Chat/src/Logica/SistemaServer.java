@@ -58,6 +58,7 @@ public class SistemaServer implements Runnable{
             try {
                 cliente = server.accept(); //espera a que alguien se conecte   
                 miModelo.getVentanaPrincipal().getLblEnunciado().setText("conectado");
+                miModelo.getVentanaPrincipal().getLblEnunciado().setBounds(40, 30, 210, 50);
                 Cliente nuevoCliente = new Cliente(this, cliente);
                 listaClientes.add(nuevoCliente);
                 nuevoCliente.start();
@@ -83,9 +84,9 @@ public class SistemaServer implements Runnable{
     public void detenerConexiones() throws IOException {
         Cliente host;
         
-        for(int c = 0; c < listaClientes.size(); c++){
-            host = listaClientes.get(c);
-            host.terminarConexiones();
+        for(int c = 0; c < listaClientes.size(); c++){//avanza en la lista de clientes desconectando uno por uno
+            host = listaClientes.get(c);//mira el de la pocicion c
+            host.terminarConexiones();//termina la conexion con ese cliente
         }
     }   
 }

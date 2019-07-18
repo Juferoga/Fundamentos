@@ -35,8 +35,6 @@ public class Inicio extends javax.swing.JFrame {
 
         Bienvenido = new javax.swing.JLabel();
         Imagen = new javax.swing.JLabel();
-        lblHost = new javax.swing.JLabel();
-        txtHost = new javax.swing.JTextField();
         lblPuerto = new javax.swing.JLabel();
         txtPuerto = new javax.swing.JTextField();
         btnJugar = new javax.swing.JButton();
@@ -56,12 +54,6 @@ public class Inicio extends javax.swing.JFrame {
         Imagen.setText("Imagen");
         getContentPane().add(Imagen);
         Imagen.setBounds(120, 30, 220, 50);
-
-        lblHost.setText("Host");
-        getContentPane().add(lblHost);
-        lblHost.setBounds(62, 80, 50, 20);
-        getContentPane().add(txtHost);
-        txtHost.setBounds(140, 80, 210, 20);
 
         lblPuerto.setText("Puerto");
         getContentPane().add(lblPuerto);
@@ -121,10 +113,6 @@ public class Inicio extends javax.swing.JFrame {
     public JTextField getTxtPuerto() {
         return txtPuerto;
     }
-
-    public JTextField getTxtHost() {
-        return txtHost;
-    }
     
     public JTextField getTxtAlias() {
         return txtAlias;
@@ -134,10 +122,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel Imagen;
     private javax.swing.JButton btnJugar;
     private javax.swing.JLabel lblAlias;
-    private javax.swing.JLabel lblHost;
     private javax.swing.JLabel lblPuerto;
     private javax.swing.JTextField txtAlias;
-    private javax.swing.JTextField txtHost;
     private javax.swing.JTextField txtPuerto;
     // End of variables declaration//GEN-END:variables
 }

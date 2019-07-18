@@ -10,48 +10,54 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import Logica.*;
+//Se importa clases para las fechas y el tiempo
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Modelo implements Runnable{
-    private SistemaServer miSistemaServer;
-    private Sistema miSistema;
+    private SistemaServer miSistemaServer;//El servidor al cual se conectara
+    private Sistema miSistema;//La aplicacion del cliente
             
-    private VentanaPrincipal vistaPrincipal;
-    private Inicio VistaInicial;
+    private VentanaPrincipal vistaPrincipal;//Vista del chat
+    private Inicio VistaInicial;//Vista para elegir si ser servidor o cliente
     
-    private int puerto;
-    private String estado;
-    private String host;
-    private String alias;
-    private Thread mensajes;
-    
-    private boolean conectado;
+    private int puerto;//Puerto al cual se conecta
+ 
+    private Calendar calendario;//variable para fechas y horas
+            
+    private String estado;//Si es servidor o cliente
+    private String host;//El host del pc por el que se hace la conexion
+    private String alias;//Nombre que sale en el mensaje
+ 
+    private Thread mensajes;//Hilo que se encarga de recibir mensajes
     
     public Modelo(){
-        mensajes = new Thread(this);
+        mensajes = new Thread(this);//Se instancia el hilo
+        host="localhost";//Se inicia el host como el localhost
     }
     
-    public Sistema getMiCliente() {
+    public Sistema getMiCliente(){//Encontrar el sistema del cliente
         if(miSistema == null){
-            miSistema = new Sistema(alias);
-        }
+            miSistema = new Sistema(alias);//Se instancia el sitema del cliente pasandole como parametro
+        }                                  //como se llama en la aplicacion
         return miSistema;
     }
     
-    public SistemaServer getMiServer() {
+    public SistemaServer getMiServer(){//Encontrar el sistema del servidor
         if(miSistemaServer == null){
             miSistemaServer = new SistemaServer(this);
         }
         return miSistemaServer;
     }
 
-    public VentanaPrincipal getVentanaPrincipal() {
+    public VentanaPrincipal getVentanaPrincipal() {//Encontrar la ventana del chat
         if(vistaPrincipal == null){
             vistaPrincipal = new VentanaPrincipal(this);
         }
         return vistaPrincipal;
     }
     
-    public Inicio getVentanaInicio() {
+    public Inicio getVentanaInicio(){//Encontrar la ventana de eleccion cliente o servidor
         if(VistaInicial == null){
             VistaInicial = new Inicio(this);
         }
@@ -64,39 +70,38 @@ public class Modelo implements Runnable{
         estado ="No tiene";
     }
     
-    public void iniciarServidor(int PuertoEntra, String HostEntra){
+    public void iniciarServidor(int PuertoEntra){
         getVentanaPrincipal().setSize(660,530);
         getVentanaPrincipal().setVisible(true);
         getVentanaInicio().setVisible(false);
         getVentanaPrincipal().getLblEnunciado().setText("Esperando alguna conexion");
+        getVentanaPrincipal().getLblEnunciado().setBounds(40, 30, 280, 50);
         getVentanaPrincipal().getTxaMensajes().setEnabled(false);
         getVentanaPrincipal().getTxtMensaje().setEnabled(false);
         getVentanaPrincipal().getBtnEnviar().setEnabled(false);
         getVentanaPrincipal().getTxaMensajes().setEditable(false);
-        conectado = false;
+        
         puerto = PuertoEntra;
-        host = HostEntra;
-        estado = "Servidor";
-        esperarConexion();       
+        estado = "Servidor";//Se escoje rol de servidor
+        esperarConexion();//Despues de crear la ventana inicial se procede a esperar conexion de algun        
     }
     
-    public void iniciarCliente(int PuertoE, String HostE, String aliasE) {
+    public void iniciarCliente(int PuertoE, String aliasE) {
         getVentanaPrincipal().setSize(660,530);
         getVentanaPrincipal().setVisible(true);        
         getVentanaInicio().setVisible(false);
-        conectado = false;
+        
         getVentanaPrincipal().getLblEnunciado().setBounds(40, 55, 20, 20);
         getVentanaPrincipal().getLblEnunciado().setText(" ");
-        getVentanaPrincipal().getLblEnunciado().setBackground(new java.awt.Color(255, 0, 0));
+        getVentanaPrincipal().getLblEnunciado().setBackground(new java.awt.Color(255, 0, 0));//color rojo sin conexion
         getVentanaPrincipal().getTxaMensajes().setEnabled(false);
         getVentanaPrincipal().getTxtMensaje().setEnabled(false);
         getVentanaPrincipal().getBtnEnviar().setEnabled(false);
         getVentanaPrincipal().getTxaMensajes().setEditable(false);
         puerto = PuertoE;
-        host = HostE;
         alias= aliasE;
         
-        estado = "Cliente";
+        estado = "Cliente";//Se escoje rol de cliente
         try { 
             conectar();
         } catch (IOException ex) {
@@ -106,48 +111,43 @@ public class Modelo implements Runnable{
     
     public void esperarConexion(){
         try {
-            getMiServer().setPuerto(puerto);
-            getMiServer().activarEsperaConexiones();
+            getMiServer().setPuerto(puerto);//Se configura el puerto por el cual se conectara el servidor
+            getMiServer().activarEsperaConexiones();//Se espera la conexionde algun alumno
             getVentanaPrincipal().getTxaMensajes().setEnabled(true);
             getVentanaPrincipal().getTxtMensaje().setEnabled(true);
             getVentanaPrincipal().getBtnEnviar().setEnabled(true);
             getVentanaPrincipal().getTxaMensajes().setEditable(true);            
-            mensajes.start();
+            mensajes.start();//Se inicia para recibir los mensajes 
         }catch (IOException ex) {
-            System.out.println("el error es, en esperando conexion:"+ex.getMessage());
             mostrarError(ex.getMessage());
-        }  
-        //getVentanaPrincipal().getLblEnunciado().setText("Conectado...");
+        } 
     }
     
-    void terminarConexion() {
+    void terminarConexion(){//Para desconectar el servidor
         try {
-            getMiServer().setEsperandoConexiones(false);
-            getMiServer().detenerConexiones();           
-            //getVentanaPrincipal().getTxtPuerto().setEnabled(true);
+            getMiServer().setEsperandoConexiones(false);//se deja de esperar conexiones
+            getMiServer().detenerConexiones();// se desconectan los clientes
         } catch (IOException ex) {
         }
     }
  
     public void conectar() throws IOException{
         try {
-            getMiCliente().conectar(host, puerto);
-            conectado = true;
+            getMiCliente().conectar(host, puerto);//Se conecta a un determinado puerto
+                                                  //con el localhost            
             getVentanaPrincipal().getTxaMensajes().setEnabled(true);
             getVentanaPrincipal().getTxtMensaje().setEnabled(true);
             getVentanaPrincipal().getBtnEnviar().setEnabled(true);
-            mensajes.start();
+            mensajes.start();//Se inicia para recibir los mensajes
         } catch (IOException ex) {
-            System.out.println("el error es en conectar:"+ex.getMessage());
             mostrarError(ex.getMessage());
-        }   
-        getVentanaPrincipal().getLblEnunciado().setBackground(new java.awt.Color(52, 204, 0));
+        } 
+        getVentanaPrincipal().getLblEnunciado().setBackground(new java.awt.Color(52, 204, 0));//color verde despues de conectar
     }
     
-    public void desconectar(){
+    public void desconectar(){//Para desconectar el cliente
         try {
-            getMiCliente().desconectar();
-            conectado = false;
+            getMiCliente().desconectar();//se desconecta del servidor
             mensajes = null;
         } catch (IOException ex) {
             mostrarError(ex.getMessage());            
@@ -162,16 +162,24 @@ public class Modelo implements Runnable{
         JOptionPane.showMessageDialog(vistaPrincipal, msg, "Error de datos", JOptionPane.ERROR_MESSAGE);
     }
     
-   public void enviarMensaje(){
+    private String esqueleto(){//Retorna el "esqueleto del mensaje" (fecha + hora)
+        calendario=new GregorianCalendar();
+        return("* " + calendario.get(Calendar.DATE) + "/" + (calendario.get(Calendar.MONTH)+1) +
+                "/" + calendario.get(Calendar.YEAR) + "  ["+calendario.get(Calendar.HOUR_OF_DAY)+":"+
+                calendario.get(Calendar.MINUTE)+"] ->  ");
+    }
+    
+    public void enviarMensaje(){//enviar determinado mensaje dependiendo del rol
         String mensaje;
         mensaje = getVentanaPrincipal().getTxtMensaje().getText();
         if (mensaje.isEmpty()) {
             mostrarError("Mensaje vacio");
             return;
         }
+        
         try {
             if(estado.equals("Cliente"))
-                getMiCliente().enviarMensaje(getMiCliente().getNombreHost()+": "+mensaje);
+                getMiCliente().enviarMensaje(esqueleto()+getMiCliente().getNombreHost()+": "+mensaje);//Se añade el esqueleto y el alias al mensaje
             else
                 getMiServer().enviarMensaje("El servidor envía: " + mensaje);
         }catch (IOException ex){
