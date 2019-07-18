@@ -43,6 +43,8 @@ CREATE TABLE Estudiante
 
 	CONSTRAINT k_codigo_pk PRIMARY KEY (k_codigo),
 	CONSTRAINT check_k_codigo CHECK (k_codigo BETWEEN 0 and 9999),
+	CONSTRAINT check_q_promedioM CHECK (q_promedioM BETWEEN 0 and 5),
+	CONSTRAINT check_q_promedioE CHECK (q_promedioE BETWEEN 0 and 5),
 	CONSTRAINT check_n_nombre CHECK (t_mensaje != ''),
 	CONSTRAINT check_n_apellido CHECK (n_apellido != ''),
 	CONSTRAINT check_o_email CHECK (o_email != '')
